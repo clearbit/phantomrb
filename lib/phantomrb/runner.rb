@@ -7,11 +7,8 @@ module Phantomrb
     end
 
     def run(script, *arguments, &block)
-      options = arguments.last.is_a?(Hash) ? arguments.pop : {}
-
-      command = @config.options.merge(options).reduce(config.executable) do |memo, (key, value)|
-        "#{memo} --#{key}=#{value}"
-      end
+      options      = arguments.last.is_a?(Hash) ? arguments.pop : {}
+      command      = @config.merge(options)
 
       command_line = "#{command} #{full_script_path(script)} #{arguments.join(' ')}"
 

@@ -4,7 +4,7 @@ describe Phantomrb do
   describe '::configure' do
     before :all do
       Phantomrb.configure do
-        option('ignore-ssl-errors', true)
+        option(:ignore_ssl_errors, true)
       end
     end
 
@@ -13,7 +13,11 @@ describe Phantomrb do
     end
 
     it 'allows to set parameters' do
-      expect(Phantomrb.configuration.options).to eq({ 'ignore-ssl-errors' => true })
+      expect(Phantomrb.configuration.options).to eq({:ignore_ssl_errors => true })
+    end
+
+    it 'to_s' do
+      expect(Phantomrb.configuration.to_s).to eq('phantomjs --ignore-ssl-errors=true')
     end
   end
 
