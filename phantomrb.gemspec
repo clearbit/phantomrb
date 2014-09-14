@@ -4,10 +4,10 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'phantomrb/version'
 
 Gem::Specification.new do |spec|
-  spec.name = 'phantomrb'
+  spec.name = 'maccman-phantomrb'
   spec.version = Phantomrb::VERSION
-  spec.authors = ['Andrei Gladkyi']
-  spec.email = ['arg@arglabs.net']
+  spec.authors = ['Andrei Gladkyi', 'Alex MacCaw']
+  spec.email = ['arg@arglabs.net', 'info@eribium.org']
   spec.description = 'An interface with PhantomJS for Ruby.'
   spec.summary = 'An interface with PhantomJS for Ruby.'
   spec.homepage = 'https://github.com/agladkyi/phantomrb'
