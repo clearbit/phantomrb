@@ -3,22 +3,32 @@ require 'ostruct'
 module Phantomrb
   class Runner
     def initialize
-      config = Phantomrb.configuration
-      @command = config.options.reduce(config.executable) do |memo, (key, value)|
-        "#{memo} --#{key}=#{value}"
-      end
+      @config = Phantomrb.configuration
     end
 
     def run(script, *arguments, &block)
-      command_line = "#{@command} #{full_script_path(script)} #{arguments.join(' ')}"
+      options = arguments.last.is_a?(Hash) ? arguments.pop : {}
+      
+      command = @config.options.merge(options).reduce(config.executable) do |memo, (key, value)|
+        "#{memo} --#{key}=#{value}"
+      end
+
+      command_line = "#{command} #{full_script_path(script)} #{arguments.join(' ')}"
+      
       begin
         process = IO.popen(command_line)
       rescue => e
         raise ExecutableLoadError.new(e)
       end
+      
       output = capture_output(process, &block)
       process.close
-      OpenStruct.new(output: output, exit_status: $?.exitstatus, command_line: command_line)
+      
+      OpenStruct.new(
+        output: output, 
+        exit_status: $?.exitstatus, 
+        command_line: command_line
+      )
     end
 
     private
