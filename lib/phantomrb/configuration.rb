@@ -3,7 +3,7 @@ module Phantomrb
     attr_reader :options, :executable
 
     def initialize(options = {})
-      @options = {}
+      @options    = options
       @executable = 'phantomjs'
     end
 

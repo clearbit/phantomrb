@@ -40,7 +40,7 @@ module Phantomrb
     #   end
     def run(script, *args, &block)
       @runner ||= Runner.new
-      @runner.run(script, args, &block)
+      @runner.run(script, *args, &block)
     end
   end
 end

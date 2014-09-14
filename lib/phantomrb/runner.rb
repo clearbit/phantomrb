@@ -6,11 +6,11 @@ module Phantomrb
       @config = Phantomrb.configuration
     end
 
-    def run(script, *arguments, &block)
-      options      = arguments.last.is_a?(Hash) ? arguments.pop : {}
+    def run(script, *args, &block)
+      options      = args.last.is_a?(Hash) ? args.pop : {}
       command      = @config.merge(options)
 
-      command_line = "#{command} #{full_script_path(script)} #{arguments.join(' ')}"
+      command_line = "#{command} #{full_script_path(script)} #{args.join(' ')}"
 
       begin
         process = IO.popen(command_line)
