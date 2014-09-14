@@ -4,4 +4,7 @@ module Phantomrb
 
   class ScriptLoadError < StandardError
   end
+
+  class ScriptRuntimeError < StandardError
+  end
 end

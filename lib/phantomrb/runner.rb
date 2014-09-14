@@ -21,6 +21,10 @@ module Phantomrb
       output = capture_output(process, &block)
       process.close
 
+      unless $?.exitstatus == 0
+        ScriptRuntimeError.new(output)
+      end
+
       OpenStruct.new(
         output: output,
         exit_status: $?.exitstatus,
