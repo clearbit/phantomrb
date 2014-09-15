@@ -22,7 +22,7 @@ module Phantomrb
       process.close
 
       unless $?.exitstatus == 0
-        ScriptRuntimeError.new(output)
+        raise ScriptRuntimeError.new(output)
       end
 
       OpenStruct.new(
