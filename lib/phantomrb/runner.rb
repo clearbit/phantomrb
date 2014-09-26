@@ -18,8 +18,6 @@ module Phantomrb
         *sargs
       ].join(' ')
 
-      p command_line
-
       begin
         process = IO.popen(command_line)
       rescue => e
