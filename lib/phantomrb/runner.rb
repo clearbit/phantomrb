@@ -1,4 +1,5 @@
 require 'ostruct'
+require 'shellwords'
 
 module Phantomrb
   class Runner
@@ -7,10 +8,17 @@ module Phantomrb
     end
 
     def run(script, *args, &block)
-      options      = args.last.is_a?(Hash) ? args.pop : {}
-      command      = @config.merge(options)
+      options   = args.last.is_a?(Hash) ? args.pop : {}
+      command   = @config.merge(options)
+      sargs     = args.map {|a| Shellwords.escape(a) }
 
-      command_line = "#{command} #{full_script_path(script)} #{args.join(' ')}"
+      command_line = [
+        command,
+        full_script_path(script),
+        *sargs
+      ].join(' ')
+
+      p command_line
 
       begin
         process = IO.popen(command_line)
